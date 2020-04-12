@@ -57,7 +57,7 @@ Grey: #D6D2C9
   }
 }
 
-#server-note {
+.server-note {
   position: absolute;
   color: #bbbbbb;
   text-align: center;
