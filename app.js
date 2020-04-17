@@ -219,11 +219,11 @@ io.sockets.on('connection', function(socket){
       game.duet = !game.duet
     } else if (data.pack === 'undercover'){
       game.undercover = !game.undercover
-    } else if (data.pack === 'nlss'){
-      game.nlss = !game.nlss
+    } else if (data.pack === 'presidents'){
+      game.presidents = !game.presidents
     }
     // If all options are disabled, re-enable the base pack
-    if (!game.base && !game.duet && !game.undercover && !game.nlss) game.base = true
+    if (!game.base && !game.duet && !game.undercover && !game.presidents) game.base = true
 
     game.updateWordPool()
     gameUpdate(room)
