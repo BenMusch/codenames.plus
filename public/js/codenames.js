@@ -45,7 +45,7 @@ let buttonServerMessageOkay = document.getElementById('server-message-okay')
 let buttonBasecards = document.getElementById('base-pack')
 let buttonDuetcards = document.getElementById('duet-pack')
 let buttonUndercovercards = document.getElementById('undercover-pack')
-let buttonNLSScards = document.getElementById('nlss-pack')
+let buttonPresidentsCards = document.getElementById('presidents-pack')
 // Slider
 let timerSlider = document.getElementById('timer-slider')
 let timerSliderLabel = document.getElementById('timer-slider-label')
@@ -173,8 +173,8 @@ buttonUndercovercards.onclick = () => {
   socket.emit('changeCards', {pack:'undercover'})
 }
 // User Clicks card pack
-buttonNLSScards.onclick = () => {
-  socket.emit('changeCards', {pack:'nlss'})
+buttonPresidentsCards.onclick = () => {
+  socket.emit('changeCards', {pack:'presidents'})
 }
 
 // When the slider is changed
@@ -336,8 +336,8 @@ function updatePacks(game){
   else buttonDuetcards.className = ''
   if (game.undercover) buttonUndercovercards.className = 'enabled'
   else buttonUndercovercards.className = ''
-  if (game.nlss) buttonNLSScards.className = 'enabled'
-  else buttonNLSScards.className = ''
+  if (game.presidents) buttonPresidentsCards.className = 'enabled'
+  else buttonPresidentsCards.className = ''
   document.getElementById('word-pool').innerHTML = "Word Pool: " + game.words.length
 }
 
