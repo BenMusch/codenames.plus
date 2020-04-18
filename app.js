@@ -1,5 +1,6 @@
-
 ////////////////////////////////////////////////////////////////////////////
+
+let path = require('path')
 
 // Express
 let express = require('express')
@@ -8,7 +9,21 @@ let express = require('express')
 let app = express()
 
 //Set up server
-let server = app.listen(process.env.PORT || 2000, listen);
+let server
+if (process.env.APP_ENV === 'development') {
+  server = app.listen(process.env.PORT || 2000, 'localhost', listen);
+} else {
+  server = app.listen(process.env.PORT || 2000, listen);
+
+  // Force SSL
+  app.use((req, res, next) => {
+    if (req.header('x-forwarded-proto') !== 'https') {
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    } else {
+      next();
+    }
+  });
+}
 
 // Callback function confirming server start
 function listen(){
@@ -16,15 +31,6 @@ function listen(){
   let port = server.address().port;
   console.log('Codenames Server Started at http://' + host + ':' + port);
 }
-
-// Force SSL
-app.use((req, res, next) => {
-  if (req.header('x-forwarded-proto') !== 'https') {
-    res.redirect(`https://${req.header('host')}${req.url}`)
-  } else {
-    next();
-  }
-});
 
 // Files for client
 app.use(express.static('public'))
